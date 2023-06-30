@@ -37,10 +37,20 @@ let event2 = {
         'useDefault': true
     }
 };
-let errorMessage = {
+let errors = {
     'success': false,
-    'error': 'invalid info'
-}
+    'error': 'Invalid date range'
+};
+
 const events = [event1, event2];
 
-export { errorMessage, events };
+
+
+const cache = {
+    "https://www.googleapis.com/calendar/v3/calendars/biere-library@thebierelibrary.com/events?timeMin=2023-07-01&timeMax=2023-07-15": events,
+    "https://www.googleapis.com/calendar/v3/calendars/biere-library@thebierelibrary.com/events?timeMin=2023-06-31&timeMax=2023-07-15": errors
+};
+
+
+
+export { cache };
