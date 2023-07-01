@@ -34,8 +34,8 @@ const env = {
 };
 
 
-function init() {
-    const resp = client.send(req);
+async function init() {
+    const resp = await client.send(req);
     // fetch(url);
     resp.json()
         .then(events => {
