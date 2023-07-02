@@ -1,6 +1,7 @@
 import renderEvents from "./components.js";
 import { testData } from "./data.js";
-import { HttpClient, HttpCache } from "./dev_modules/http/http.js";
+import { HttpClient } from "./dev_modules/http/httpClient.js";
+import { HttpCache } from "./dev_modules/http/httpCache.js";
 export default init;
 
 
@@ -19,7 +20,7 @@ function queryByDateRange(start, end) {
 
 
 const cache = new HttpCache(testData);
-const config = {cache: cache};
+const config = { cache: cache };
 const client = new HttpClient(config);
 const url = queryByDateRange("2023-07-01", "2023=07-15");
 const invalidUrl = queryByDateRange("2023-06-31", "2023=07-15");
