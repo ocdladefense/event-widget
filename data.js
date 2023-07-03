@@ -37,20 +37,14 @@ let event2 = {
         'useDefault': true
     }
 };
-let errors = {
-    'success': false,
-    'error': 'Invalid date range'
-};
+
 
 const events = [event1, event2];
 
 
 
-const cache = {
-    "https://www.googleapis.com/calendar/v3/calendars/biere-library@thebierelibrary.com/events?timeMin=2023-07-01&timeMax=2023-07-15": events,
-    "https://www.googleapis.com/calendar/v3/calendars/biere-library@thebierelibrary.com/events?timeMin=2023-06-31&timeMax=2023-07-15": errors
-};
 
 
 
-export default cache;
+
+export default events;

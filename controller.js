@@ -24,7 +24,7 @@ function queryByDateRange(start, end) {
 const cache = new HttpCache(testData);
 const config = { cache: cache };
 const client = new HttpClient(config);
-client.register("www.googleapis.com", new GoogleApisCalendarMock(null));
+client.register("www.googleapis.com", new GoogleApisCalendarMock());
 const url = queryByDateRange("2023-07-01", "2023=07-15");
 const invalidUrl = queryByDateRange("2023-06-31", "2023=07-15");
 const req = new Request(url);

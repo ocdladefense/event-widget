@@ -16,7 +16,7 @@ class HttpClient {
   mode = MODE_TEST;
 
   config = null;
-  mocks = {};
+  static mocks = {};
   // Prototypical inheritance in JavaScript.
 
   // Class-based inheritance.
@@ -52,8 +52,14 @@ class HttpClient {
   }
 
   static register(domain, mock) {
-    mock.domain = domain;
     mocks[domain] = mock;
+  }
+  //https://www.googleapis.com/calendar/v3/calendars/biere-library@thebierelibrary.com/events?timeMin=2023-07-01&timeMax=2023=07-15&test
+  getMock(req) {
+    let url = req.url;
+    //pretend that we have parsed the url
+    let domain = "www.googleapis.com";
+    return mocks[domain];
   }
 }
 
