@@ -1,4 +1,4 @@
-export { HttpMock, GoogleApisCalendarMock }
+export { HttpMock };
 
 
 
@@ -15,7 +15,3 @@ class HttpMock {
     }
 }
 
-class GoogleApisCalendarMock extends HttpMock {
-    static domain = null;
-
-}

@@ -7,7 +7,7 @@ class HttpCache {
 
     constructor(data) {
         for (var key in data) {
-            cache[key] = Response.json(data);
+            this.cache[key] = Response.json(data);
         }
     }
 

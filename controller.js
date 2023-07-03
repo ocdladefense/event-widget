@@ -1,8 +1,8 @@
 import renderEvents from "./components.js";
-import { testData } from "./data.js";
-import { HttpClient } from "./dev_modules/http/httpClient.js";
-import { HttpCache } from "./dev_modules/http/httpCache.js";
-import { GoogleApisCalendarMock } from "./dev_modules/http/httpMock.js";
+import testData from "./data.js";
+import { HttpClient } from "./dev_modules/http/HttpClient.js";
+import { HttpCache } from "./dev_modules/http/HttpCache.js";
+import { GoogleApisCalendarMock } from "./dev_modules/mock/GoogleApisCalendarMock.js";
 export default init;
 export { init };
 

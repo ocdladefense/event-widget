@@ -1,7 +1,7 @@
-import { HttpCache } from "./httpCache";
-import { HttpMock, GoogleApisCalendarMock } from "./httpMock";
+import { HttpCache } from "./HttpCache.js";
+import { HttpMock } from "./HttpMock.js";
 
-export { HttpClient }
+export { HttpClient };
 
 
 
@@ -52,7 +52,7 @@ class HttpClient {
   }
 
   static register(domain, mock) {
-    mock.domain = domain
+    mock.domain = domain;
     mocks[domain] = mock;
   }
 }
