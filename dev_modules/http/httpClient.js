@@ -1,5 +1,5 @@
 import { HttpCache } from "./httpCache";
-import { HttpMock } from "./httpMock";
+import { HttpMock, GoogleApisCalendarMock } from "./httpMock";
 
 export { HttpClient }
 
@@ -16,7 +16,7 @@ class HttpClient {
   mode = MODE_TEST;
 
   config = null;
-
+  mocks = {};
   // Prototypical inheritance in JavaScript.
 
   // Class-based inheritance.
@@ -49,6 +49,11 @@ class HttpClient {
 
     }
 
+  }
+
+  static register(domain, mock) {
+    mock.domain = domain
+    mocks[domain] = mock;
   }
 }
 
