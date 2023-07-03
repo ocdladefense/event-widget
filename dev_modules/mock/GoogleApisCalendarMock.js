@@ -53,7 +53,6 @@ class GoogleApisCalendarMock extends HttpMock {
 
     getResponse(req) {
         let url = new Url(req.url);
-        //pretend we have parsed the url
         let query = url.parseQueryString();
         //find the events or error that corresponds to timeMin and timeMax
         let start = query.timeMin;

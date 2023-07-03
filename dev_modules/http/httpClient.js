@@ -57,8 +57,16 @@ class HttpClient {
   //https://www.googleapis.com/calendar/v3/calendars/biere-library@thebierelibrary.com/events?timeMin=2023-07-01&timeMax=2023=07-15&test
   getMock(req) {
     let url = req.url;
-    //pretend that we have parsed the url
-    let domain = "www.googleapis.com";
+    parts = url.split("/");
+    /* With the way I have split this you need to choose the string at index 2 because 0 will be https: and 1 
+    will just be an empty string because there is no space or anything between // */
+    let domain = parts[2];
+    /* could also do this
+    parts = url.split("//");
+    let splitUrl = parts[2];
+    let urlParts = splitUrl.split("/");
+    let domain = urlParts[0];
+    */
     return mocks[domain];
   }
 }
