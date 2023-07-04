@@ -1,8 +1,9 @@
 import renderEvents from "./components.js";
 import testData from "./data.js";
-import { HttpClient } from "./dev_modules/http/httpClient.js";
-import { HttpCache } from "./dev_modules/http/httpCache.js";
+import { HttpClient } from "./dev_modules/http/HttpClient.js";
+import { HttpCache } from "./dev_modules/http/HttpCache.js";
 import { GoogleApisCalendarMock } from "./dev_modules/mock/GoogleApisCalendarMock.js";
+import { Url } from "./dev_modules/http/Url.js";
 export default init;
 export { init };
 
@@ -13,13 +14,17 @@ function queryByDateRange(start, end) {
 
     // built-ins
     let calendarId = "biere-library@thebierelibrary.com";
-    let url = "https://www.googleapis.com/calendar/v3/calendars/" + calendarId + "/events";
+    let url = "https://www.googleapis.com/calendar/v3/calendars/" + calendarId + "/event?fu=bar";
+    url = new Url(url);
+    //url = url + "?" + "timeMin=" + start + "&timeMax=" + end;
+    url.buildQuery("timeMin", start);
+    url.buildQuery("timeMax", end);
+    url.buildQuery("TEST");
 
-    url = url + "?" + "timeMin=" + start + "&timeMax=" + end;
-    return url;
+    return url.toString();
 
 }
-
+window.query = queryByDateRange;
 
 const cache = new HttpCache(testData);
 const config = { cache: cache };
@@ -42,7 +47,7 @@ const env = {
 async function init() {
     let url = queryByDateRange("2023-07-01", "2023-07-15");
     const invalidUrl = queryByDateRange("2023-06-31", "2023-07-15");
-    client.register("www.googleapis.com", new GoogleApisCalendarMock());
+    HttpClient.register("www.googleapis.com", new GoogleApisCalendarMock());
 
     let nextDate = new Date(env.today);
     nextDate.setDate(nextDate.getDate() + 1);

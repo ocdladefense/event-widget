@@ -80,7 +80,7 @@ class GoogleApisCalendarMock extends HttpMock {
         let url = new Url(req.url);
         let data = [];
         //pretend we have parsed the url
-        let query = url.parseQueryString();
+        let query = url.getQuery();
         //find the events or error that corresponds to timeMin and timeMax
         let start = new Date(query.timeMin);
         let end = new Date(query.timeMax);
@@ -96,16 +96,16 @@ class GoogleApisCalendarMock extends HttpMock {
         for (var i = 0; i < events.length; i++) {
             // these variables should eventually be a separate function to process localization
             // ternary to check if dateTime exists; if exists, get the year-month-day part of the string. if not, get normal date.
-            let start = new Date( (events[i].start.dateTime) ? events[i].start.dateTime.substring(0, 10) : events[i].start.date );
-            let end = new Date( (events[i].end.dateTime) ? events[i].end.dateTime.substring(0, 10) : events[i].end.date );
-            
+            let start = new Date((events[i].start.dateTime) ? events[i].start.dateTime.substring(0, 10) : events[i].start.date);
+            let end = new Date((events[i].end.dateTime) ? events[i].end.dateTime.substring(0, 10) : events[i].end.date);
+
             if ((timeMax >= start && start >= timeMin) || (timeMax >= end && end >= timeMin)) {
                 data.push(events[i]);
             }
         }
-        
+
         return data;
     }
 
-    
+
 }

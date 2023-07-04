@@ -1,5 +1,6 @@
 import { HttpCache } from "./HttpCache.js";
 import { HttpMock } from "./HttpMock.js";
+import { Url } from "./Url.js";
 
 export { HttpClient };
 
@@ -16,7 +17,7 @@ class HttpClient {
   mode = MODE_TEST;
 
   config = null;
-  mocks = {};
+  static mocks = {};
   // Prototypical inheritance in JavaScript.
 
   // Class-based inheritance.
@@ -37,6 +38,7 @@ class HttpClient {
       // E.g., this.getMock(req.url).
       // For more info, see:
       //  https://developer.mozilla.org/en-US/docs/Web/API/Request/url
+      console.log(req.url);
       let mock = this.getMock(req);
 
       return mock.getResponse(req);
@@ -51,23 +53,20 @@ class HttpClient {
 
   }
 
-  register(domain, mock) {
-    this.mocks[domain] = mock;
+  static register(domain, mock) {
+    HttpClient.mocks[domain] = mock;
   }
   //https://www.googleapis.com/calendar/v3/calendars/biere-library@thebierelibrary.com/events?timeMin=2023-07-01&timeMax=2023=07-15&test
   getMock(req) {
-    let url = req.url;
-    let parts = url.split("/");
+    let url = new Url(req.url);
+
     /* With the way I have split this you need to choose the string at index 2 because 0 will be https: and 1 
     will just be an empty string because there is no space or anything between // */
-    let domain = parts[2];
+    let domain = url.getDomain();
     /* could also do this
-    parts = url.split("//");
-    let splitUrl = parts[2];
-    let urlParts = splitUrl.split("/");
-    let domain = urlParts[0];
+    
     */
-    return this.mocks[domain];
+    return HttpClient.mocks[domain];
   }
 }
 
