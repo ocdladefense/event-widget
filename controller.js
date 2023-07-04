@@ -41,7 +41,7 @@ const env = {
 
 async function init() {
     let url = queryByDateRange("2023-07-01", "2023-07-15");
-    let invalidUrl = queryByDateRange("2023-06-31", "2023-07-15");
+    const invalidUrl = queryByDateRange("2023-06-31", "2023-07-15");
     client.register("www.googleapis.com", new GoogleApisCalendarMock());
 
     let nextDate = new Date(env.today);
@@ -55,6 +55,10 @@ async function init() {
 
     if (this.id == "tomorrow") {
         url = queryByDateRange(env.today, dateString);
+    }
+
+    if (this.id == "invalid") {
+        url = invalidUrl;
     }
 
     const req = new Request(url);
