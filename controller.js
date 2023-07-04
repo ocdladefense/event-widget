@@ -4,6 +4,7 @@ import { HttpClient } from "./dev_modules/http/HttpClient.js";
 import { HttpCache } from "./dev_modules/http/HttpCache.js";
 import { GoogleApisCalendarMock } from "./dev_modules/mock/GoogleApisCalendarMock.js";
 import { Url } from "./dev_modules/http/Url.js";
+import { ISODate } from "./dev_modules/date/Date.js";
 export default init;
 export { init };
 
@@ -49,9 +50,15 @@ async function init() {
     const invalidUrl = queryByDateRange("2023-06-31", "2023-07-15");
     HttpClient.register("www.googleapis.com", new GoogleApisCalendarMock());
 
+    let today = new ISODate(env.today);
+    let tomorrow = today.addDays(1);
+
+    /*
     let nextDate = new Date(env.today);
     nextDate.setDate(nextDate.getDate() + 1);
-    let dateString = nextDate.toISOString().substring(0, 10);
+    nextDate = new ISODate(nextDate);
+    */
+    //let dateString = nextDate.getISODate();
 
 
     if (this.id == "button") {
@@ -59,7 +66,7 @@ async function init() {
     }
 
     if (this.id == "tomorrow") {
-        url = queryByDateRange(env.today, dateString);
+        url = queryByDateRange(env.today, tomorrow.getDate());
     }
 
     if (this.id == "invalid") {
