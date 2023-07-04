@@ -1,3 +1,5 @@
+export { Url };
+
 class Url {
     url = null;
     constructor(url) {
@@ -10,7 +12,7 @@ class Url {
         let queryParts = queryString.split("&");
         //timeMin=2023-07-01
         const query = {};
-        for (let i = 0; i < queryParts.length(); i++) {
+        for (let i = 0; i < queryParts.length; i++) {
             let kvp = queryParts[i];
             let parts = kvp.split("=");
             let key = parts[0];

@@ -16,7 +16,7 @@ class HttpClient {
   mode = MODE_TEST;
 
   config = null;
-  static mocks = {};
+  mocks = {};
   // Prototypical inheritance in JavaScript.
 
   // Class-based inheritance.
@@ -51,13 +51,13 @@ class HttpClient {
 
   }
 
-  static register(domain, mock) {
-    mocks[domain] = mock;
+  register(domain, mock) {
+    this.mocks[domain] = mock;
   }
   //https://www.googleapis.com/calendar/v3/calendars/biere-library@thebierelibrary.com/events?timeMin=2023-07-01&timeMax=2023=07-15&test
   getMock(req) {
     let url = req.url;
-    parts = url.split("/");
+    let parts = url.split("/");
     /* With the way I have split this you need to choose the string at index 2 because 0 will be https: and 1 
     will just be an empty string because there is no space or anything between // */
     let domain = parts[2];
@@ -67,7 +67,7 @@ class HttpClient {
     let urlParts = splitUrl.split("/");
     let domain = urlParts[0];
     */
-    return mocks[domain];
+    return this.mocks[domain];
   }
 }
 
