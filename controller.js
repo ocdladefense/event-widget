@@ -30,12 +30,7 @@ window.query = queryByDateRange;
 const cache = new HttpCache(testData);
 const config = { cache: cache };
 const client = new HttpClient(config);
-/*
-const url = queryByDateRange("2023-07-01", "2023-07-15");
-const invalidUrl = queryByDateRange("2023-06-31", "2023-07-15");
-client.register("www.googleapis.com", new GoogleApisCalendarMock(url));
-const req = new Request(url);
-*/
+
 // Pretending what the current environment looks like for this machine/application.
 const env = {
     today: "2023-06-30",
@@ -76,7 +71,7 @@ async function init() {
     const req = new Request(url);
 
     const resp = await client.send(req);
-    // fetch(url);
+
     resp.json()
         .then(events => {
             if (events.error) {
@@ -84,7 +79,7 @@ async function init() {
             }
             console.log(events);
             const eventsContainer = document.getElementById('events');
-            eventsContainer.innerHTML = renderEvents(events);
+            eventsContainer.innerHTML = renderEvents(events).join("\n");
         })
         .catch(error => {
             alert('Error: ' + error.message);
