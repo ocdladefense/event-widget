@@ -1,12 +1,7 @@
 export default renderEvents;
 
 function renderEvents(data) {
-    return (
-        data.map((event, index) => (
-
-            renderEvent(event, index)
-        ))
-    )
+        return data.map(renderEvent); // This is how we pass an identifier to map().
 }
 
 function renderEvent(event, index) {
