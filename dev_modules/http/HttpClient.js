@@ -21,10 +21,10 @@ class HttpClient {
   // Prototypical inheritance in JavaScript.
 
   // Class-based inheritance.
-  constructor(config) {
+  /*(constructor(config) {
     this.config = config;
     this.cache = this.config.cache || HttpCache.newFromMode(this.mode);
-  }
+  }*/
 
 
   /**

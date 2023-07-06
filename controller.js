@@ -1,5 +1,4 @@
 import renderEvents from "./components.js";
-import testData from "./data.js";
 import { HttpClient } from "./dev_modules/http/HttpClient.js";
 import { HttpCache } from "./dev_modules/http/HttpCache.js";
 import { GoogleApisCalendarMock } from "./dev_modules/mock/GoogleApisCalendarMock.js";
@@ -27,8 +26,8 @@ function queryByDateRange(start, end) {
 }
 window.query = queryByDateRange;
 
-const cache = new HttpCache(testData);
-const config = { cache: cache };
+//const cache = new HttpCache(testData);
+const config = {};
 const client = new HttpClient(config);
 
 // Pretending what the current environment looks like for this machine/application.

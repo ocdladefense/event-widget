@@ -36,6 +36,18 @@ class ISODate {
         return (max >= end && end >= min)
     }
 
+    eventDate(event) {
+        return (event.start.date ? this.formatDate() : this.formatDateTime());
+    }
+
+    formatDate() {
+        return this.date = new Date(this.date).toLocaleDateString("en-US", this.DATEOPTIONS);
+    }
+
+    formatDateTime() {
+        return this.date = new Date(this.date).toLocaleDateString("en-US", this.OPTIONS);
+    }
+
     addDays(days) {
         let newDate = new Date(this.date);
         newDate.setDate(newDate.getDate() + days);

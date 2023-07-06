@@ -1,26 +1,17 @@
+import { ISODate } from "./dev_modules/date/Date.js";
+
 export default renderEvents;
 
 function renderEvents(data) {
-        return data.map(renderEvent); // This is how we pass an identifier to map().
+    return data.map(renderEvent); // This is how we pass an identifier to map().
 }
 
 function renderEvent(event, index) {
-    const OPTIONS = { year: "numeric", month: "long", day: "2-digit", hour: "numeric", minute: "numeric", hc: "h12" }
-    const DATEOPTIONS = { year: "numeric", month: "long", day: "2-digit", timeZone: "UTC" }
-    let startDate;
-    let endDate;
-    if (event.start.date) {
-        startDate = event.start.date;
-        endDate = event.end.date;
-        startDate = new Date(event.start.date).toLocaleDateString("en-US", DATEOPTIONS);
-        endDate = new Date(event.end.date).toLocaleDateString("en-US", DATEOPTIONS);
-    }
-    else {
-        startDate = event.start.dateTime;
-        endDate = event.end.dateTime;
-        startDate = new Date(event.start.dateTime).toLocaleDateString("en-US", OPTIONS);
-        endDate = new Date(event.end.dateTime).toLocaleDateString("en-US", OPTIONS);
-    }
+    let startDate = (event.start.date ? new ISODate(event.start.date) : new ISODate(event.start.dateTime))
+    let endDate = (event.start.date ? new ISODate(event.start.date) : new ISODate(event.start.dateTime));
+    startDate = startDate.eventDate(event);
+    endDate = endDate.eventDate(event);
+
     return `<div key=${index}>
                     <h2>${event.summary}</h2>
                     <p>Location: ${event.location}</p>
