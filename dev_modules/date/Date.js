@@ -16,11 +16,11 @@ class ISODate {
     }
 
     getFullPrettyDate() {
-        return this.date.toLocaleDateString("en-US", OPTIONS);
+        return new Date(this.date).toLocaleDateString("en-US", this.OPTIONS);
     }
 
     getPrettyDate() {
-        return this.date.toLocaleDateString("en-US", DATEOPTIONS);
+        return new Date(this.date).toLocaleDateString("en-US", this.DATEOPTIONS);
     }
 
     getDate() {
@@ -37,15 +37,7 @@ class ISODate {
     }
 
     eventDate(event) {
-        return (event.start.date ? this.formatDate() : this.formatDateTime());
-    }
-
-    formatDate() {
-        return this.date = new Date(this.date).toLocaleDateString("en-US", this.DATEOPTIONS);
-    }
-
-    formatDateTime() {
-        return this.date = new Date(this.date).toLocaleDateString("en-US", this.OPTIONS);
+        return (event.start.date ? this.getPrettyDate() : this.getFullPrettyDate());
     }
 
     addDays(days) {
