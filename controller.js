@@ -3,7 +3,7 @@ import { HttpClient } from "./dev_modules/http/HttpClient.js";
 import { HttpCache } from "./dev_modules/http/HttpCache.js";
 import { GoogleApisCalendarMock } from "./dev_modules/mock/GoogleApisCalendarMock.js";
 import { Url } from "./dev_modules/http/Url.js";
-import { ISODate } from "./dev_modules/date/Date.js";
+import { ISODate } from "./dev_modules/date/ISODate.js";
 export default init;
 export { init };
 
@@ -35,7 +35,8 @@ const env = {
     today: "2023-06-30",
     season: "spring",
     weather: "mostly sunny",
-    city: "Corvallis, OR"
+    city: "Corvallis, OR",
+    displayErrors: false, // We can imagine sceniors where we might *want to dipslay a message to the user.
 };
 
 
@@ -69,19 +70,23 @@ async function init() {
 
     const req = new Request(url);
 
-    const resp = await client.send(req);
 
-    resp.json()
-        .then(events => {
-            if (events.error) {
-                throw new Error(events.error);
-            }
-            console.log(events);
-            const eventsContainer = document.getElementById('events');
-            eventsContainer.innerHTML = renderEvents(events).join("\n");
-        })
-        .catch(error => {
-            alert('Error: ' + error.message);
-            console.error('Error: ', error);
-        });
+
+    await client.send(req)
+    .json()
+    .then(events => {
+        if (events.error) {
+            throw new Error(events.error);
+        }
+        console.log(events);
+        const eventsContainer = document.getElementById('events');
+        eventsContainer.innerHTML = renderEvents(events).join("\n");
+    })
+    .catch(error => {
+        // alert('Error: ' + error.message);
+        console.error('Error: ', error);
+        if(env.displayErrors) { // Might help the customer.
+            eventsContainer.innerHTML = error;
+        }
+    });
 }

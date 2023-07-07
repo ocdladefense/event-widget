@@ -1,4 +1,4 @@
-import { ISODate } from "../date/Date.js";
+import { ISODate } from "../date/ISODate.js";
 import { HttpMock } from "../http/HttpMock.js";
 import { Url } from "../http/Url.js";
 import { DateRange } from "../date/DateRange.js";
@@ -85,7 +85,40 @@ class GoogleApisCalendarMock extends HttpMock {
         let query = url.getQuery();
         //find the events or error that corresponds to timeMin and timeMax
 
-        data = this.filterEvents(query.timeMin, query.timeMax);
+        // 30 days hath September, April, June & November.
+        let daysInMonth = {
+            1: 31,
+            2: 28,
+            3: 31,
+            4: 30,
+            5: 31,
+            6: 30,
+            7: 31,
+            8: 31,
+            9: 30,
+            10: 31,
+            11: 30,
+            12: 31
+        };
+
+
+
+
+        try {
+
+
+
+            data = this.filterEvents(query.timeMin, query.timeMax);
+        } catch(e) {
+            
+            data = {
+                success: false,
+                error: true,
+                code: "INVALID_RANGE",
+                message: e.message
+            };
+        }
+
 
         return Response.json(data);
     }
@@ -104,7 +137,16 @@ class GoogleApisCalendarMock extends HttpMock {
     }
     */
 
+    // Should be able to take both OR either of timeMin, timeMax.
     filterEvents(timeMin, timeMax) {
+
+        let e = new RangeError("invalid date");
+        if (false) {
+            throw e;
+        }
+
+
+
         let min = new Date(timeMin);
         let max = new Date(timeMax);
         let range = new DateRange(min, max);

@@ -1,4 +1,4 @@
-import { ISODate } from "./dev_modules/date/Date.js";
+import { ISODate } from "./dev_modules/date/ISODate.js";
 
 export default renderEvents;
 
@@ -7,8 +7,8 @@ function renderEvents(data) {
 }
 
 function renderEvent(event, index) {
-    let startDate = (event.start.date ? new ISODate(event.start.date) : new ISODate(event.start.dateTime))
-    let endDate = (event.start.date ? new ISODate(event.start.date) : new ISODate(event.start.dateTime));
+    let startDate = new ISODate(event.start.date ? event.start.date : event.start.dateTime)
+    let endDate = new ISODate(event.end.date ? event.end.date : event.end.dateTime);
     startDate = startDate.eventDate(event);
     endDate = endDate.eventDate(event);
 

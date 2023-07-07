@@ -1,4 +1,6 @@
 export { DateRange };
+import { ISODate } from "./ISODate.js";
+
 
 class DateRange {
 
@@ -8,6 +10,7 @@ class DateRange {
     constructor(dateStart, dateEnd) {
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
+        // Date.isValid() // remember static method.
     }
 
     isWithinRange(eventStart, eventEnd) {

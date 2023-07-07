@@ -8,7 +8,12 @@ class ISODate {
     date = null;
 
     constructor(datetime) {
+       // ISODate.isValid(datetime);
         this.date = new Date(datetime);
+    }
+
+    static isValid(date) {
+        // is date a string?
     }
 
     getFullDate() {
