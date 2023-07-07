@@ -11,6 +11,6 @@ class DateRange {
     }
 
     isWithinRange(eventStart, eventEnd) {
-        return (this.dateStart >= eventStart && eventStart >= this.dateEnd) || (this.dateStart >= eventEnd && eventEnd >= this.dateEnd);
+        return (this.dateStart <= eventStart && eventStart <= this.dateEnd) || (this.dateStart <= eventEnd && eventEnd <= this.dateEnd);
     }
 }

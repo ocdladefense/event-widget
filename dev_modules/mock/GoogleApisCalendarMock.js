@@ -94,6 +94,7 @@ class GoogleApisCalendarMock extends HttpMock {
         let min = new Date(timeMin);
         let max = new Date(timeMax);
         let range = new DateRange(min, max);
+        console.log(min, max);
 
         function fn(event) {
             // these variables should eventually be a separate function to process localization
@@ -101,8 +102,8 @@ class GoogleApisCalendarMock extends HttpMock {
             let eventStart = new Date(event.start.dateTime || event.start.date);
             let eventEnd = new Date(event.end.dateTime || event.end.date);
             
-            //return range.isWithinRange(eventStart, eventEnd);
-            return true;
+            return range.isWithinRange(eventStart, eventEnd);
+            //return true;
         }
 
         return events.filter(fn);
