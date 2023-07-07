@@ -90,6 +90,20 @@ class GoogleApisCalendarMock extends HttpMock {
         return Response.json(data);
     }
 
+    /*
+    eventSort(a, b) {
+        let aTime = new Date(a.start.date || a.start.dateTime);
+        let bTime = new Date(b.start.date || b.start.dateTime);
+    
+        if (aTime < bTime) {
+            return -1;
+        } else if (aTime > bTime) {
+            return 1;
+        }
+        return 0;
+    }
+    */
+
     filterEvents(timeMin, timeMax) {
         let min = new Date(timeMin);
         let max = new Date(timeMax);
