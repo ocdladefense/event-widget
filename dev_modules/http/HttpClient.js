@@ -39,9 +39,27 @@ class HttpClient {
       // For more info, see:
       //  https://developer.mozilla.org/en-US/docs/Web/API/Request/url
       //console.log(req.url);
-      let mock = this.getMock(req);
 
-      return mock.getResponse(req);
+      let data = [];
+
+      try {
+        if (navigator.onLine == false) {
+          throw new Error("Network offline.");
+        }
+
+        let mock = this.getMock(req);
+
+        return mock.getResponse(req);
+    } catch (e) {
+        data = {
+            success: false,
+            error: true,
+            code: e.cause,
+            message: e.message
+        };
+
+        return Response.json(data);
+    }
       // We may or may not continue to use this caching facility.
       // Instead, let's give preference to this.getMock().
       // return this.cache.get(req.url);

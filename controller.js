@@ -10,8 +10,7 @@ export { init };
 
 
 
-function queryByDateRange(start, end) {
-
+function queryByDateRange(start = null, end = null) {
     // built-ins
     let calendarId = "biere-library@thebierelibrary.com";
     let url = "https://www.googleapis.com/calendar/v3/calendars/" + calendarId + "/event?fu=bar";
@@ -62,6 +61,14 @@ async function init() {
 
     if (this.id == "tomorrow") {
         url = queryByDateRange(env.today, tomorrow.getDate());
+    }
+
+    if (this.id == "min") {
+        url = queryByDateRange("2023-07-01");
+    }
+
+    if (this.id == "max") {
+        url = queryByDateRange(null, "2023-07-15");
     }
 
     if (this.id == "invalid") {

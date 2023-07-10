@@ -87,13 +87,13 @@ class GoogleApisCalendarMock extends HttpMock {
 
         // 30 days hath September, April, June & November.
 
-
-
-
-
         try {
-            ISODate.isValid(query.timeMin);
-            ISODate.isValid(query.timeMax);
+            if (query.timeMin != null) {
+                ISODate.isValid(query.timeMin);
+            }
+            if (query.timeMax != null) {
+                ISODate.isValid(query.timeMax);
+            }
             data = this.filterEvents(query.timeMin, query.timeMax);
             if (data.length == 0) {
                 throw new Error("No events in date range", { cause: "RANGE_EMPTY" });
@@ -128,9 +128,7 @@ class GoogleApisCalendarMock extends HttpMock {
 
     // Should be able to take both OR either of timeMin, timeMax.
     filterEvents(timeMin, timeMax) {
-        let min = new Date(timeMin);
-        let max = new Date(timeMax);
-        let range = new DateRange(min, max);
+        let range = new DateRange(timeMin, timeMax);
 
         function fn(event) {
             // these variables should eventually be a separate function to process localization
