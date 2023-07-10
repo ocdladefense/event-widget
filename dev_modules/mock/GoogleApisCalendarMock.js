@@ -86,20 +86,7 @@ class GoogleApisCalendarMock extends HttpMock {
         //find the events or error that corresponds to timeMin and timeMax
 
         // 30 days hath September, April, June & November.
-        let daysInMonth = {
-            1: 31,
-            2: 28,
-            3: 31,
-            4: 30,
-            5: 31,
-            6: 30,
-            7: 31,
-            8: 31,
-            9: 30,
-            10: 31,
-            11: 30,
-            12: 31
-        };
+
 
 
 
@@ -109,8 +96,8 @@ class GoogleApisCalendarMock extends HttpMock {
 
 
             data = this.filterEvents(query.timeMin, query.timeMax);
-        } catch(e) {
-            
+        } catch (e) {
+
             data = {
                 success: false,
                 error: true,
@@ -145,7 +132,7 @@ class GoogleApisCalendarMock extends HttpMock {
             throw e;
         }
 
-
+        let validMin = ISODate.isValid(timeMin);
 
         let min = new Date(timeMin);
         let max = new Date(timeMax);
@@ -157,7 +144,7 @@ class GoogleApisCalendarMock extends HttpMock {
             // ternary to check if dateTime exists; if exists, get the year-month-day part of the string. if not, get normal date.
             let eventStart = new Date(event.start.dateTime || event.start.date);
             let eventEnd = new Date(event.end.dateTime || event.end.date);
-            
+
             return range.isWithinRange(eventStart, eventEnd);
             //return true;
         }

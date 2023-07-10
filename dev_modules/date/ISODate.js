@@ -8,12 +8,34 @@ class ISODate {
     date = null;
 
     constructor(datetime) {
-       // ISODate.isValid(datetime);
+        // ISODate.isValid(datetime);
         this.date = new Date(datetime);
     }
 
     static isValid(date) {
         // is date a string?
+        let daysInMonth = {
+            1: 31,
+            2: 28,
+            3: 31,
+            4: 30,
+            5: 31,
+            6: 30,
+            7: 31,
+            8: 31,
+            9: 30,
+            10: 31,
+            11: 30,
+            12: 31
+        };
+        //example date 2023-07-01
+        let parts = date.split("-");
+        let month = parts[1];
+        month = parseInt(month);
+        let day = parts[2];
+        day = parseInt(day);
+        console.log(date, day, month, daysInMonth[month], daysInMonth[month] == day)
+        return (day <= daysInMonth[month] ? true : false);
     }
 
     getFullDate() {

@@ -73,20 +73,20 @@ async function init() {
 
 
     await client.send(req)
-    .json()
-    .then(events => {
-        if (events.error) {
-            throw new Error(events.error);
-        }
-        console.log(events);
-        const eventsContainer = document.getElementById('events');
-        eventsContainer.innerHTML = renderEvents(events).join("\n");
-    })
-    .catch(error => {
-        // alert('Error: ' + error.message);
-        console.error('Error: ', error);
-        if(env.displayErrors) { // Might help the customer.
-            eventsContainer.innerHTML = error;
-        }
-    });
+        .json()
+        .then(events => {
+            if (events.error) {
+                throw new Error(events.error);
+            }
+            console.log(events);
+            const eventsContainer = document.getElementById('events');
+            eventsContainer.innerHTML = renderEvents(events).join("\n");
+        })
+        .catch(error => {
+            // alert('Error: ' + error.message);
+            console.error('Error: ', error);
+            if (env.displayErrors) { // Might help the customer.
+                eventsContainer.innerHTML = error;
+            }
+        });
 }
