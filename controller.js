@@ -36,7 +36,7 @@ const env = {
     season: "spring",
     weather: "mostly sunny",
     city: "Corvallis, OR",
-    displayErrors: false, // We can imagine sceniors where we might *want to dipslay a message to the user.
+    displayErrors: true, // We can imagine sceniors where we might *want to dipslay a message to the user.
 };
 
 
@@ -67,26 +67,26 @@ async function init() {
     if (this.id == "invalid") {
         url = invalidUrl;
     }
-
+    const eventsContainer = document.getElementById('events');
     const req = new Request(url);
 
-
-
-    await client.send(req)
-        .json()
+    const resp = await client.send(req);
+    //wasn't working like this so went back to old way temporarily 
+    //await client.send(req)
+    resp.json()
         .then(events => {
             if (events.error) {
-                throw new Error(events.error);
+                throw new Error(events.message, { cause: events });
             }
             console.log(events);
-            const eventsContainer = document.getElementById('events');
+
             eventsContainer.innerHTML = renderEvents(events).join("\n");
         })
         .catch(error => {
             // alert('Error: ' + error.message);
-            console.error('Error: ', error);
-            if (env.displayErrors) { // Might help the customer.
-                eventsContainer.innerHTML = error;
+            console.error(error);
+            if (env.displayErrors && error.cause.code == "RANGE_EMPTY") { // Might help the customer.
+                eventsContainer.innerHTML = "Free to Register";
             }
         });
 }

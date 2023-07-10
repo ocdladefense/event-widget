@@ -8,9 +8,10 @@ class DateRange {
     dateEnd = null;
 
     constructor(dateStart, dateEnd) {
+        ISODate.isValid(dateStart);
+        ISODate.isValid(dateEnd);
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
-        // Date.isValid() // remember static method.
     }
 
     isWithinRange(eventStart, eventEnd) {

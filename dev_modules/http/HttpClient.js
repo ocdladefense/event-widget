@@ -38,7 +38,7 @@ class HttpClient {
       // E.g., this.getMock(req.url).
       // For more info, see:
       //  https://developer.mozilla.org/en-US/docs/Web/API/Request/url
-      console.log(req.url);
+      //console.log(req.url);
       let mock = this.getMock(req);
 
       return mock.getResponse(req);

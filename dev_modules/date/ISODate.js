@@ -8,12 +8,16 @@ class ISODate {
     date = null;
 
     constructor(datetime) {
-        // ISODate.isValid(datetime);
+        ISODate.isValid(datetime);
         this.date = new Date(datetime);
+
     }
 
     static isValid(date) {
         // is date a string?
+        if (!(typeof date == "string")) {
+            date = ISODate.dateToString(date);
+        }
         let daysInMonth = {
             1: 31,
             2: 28,
@@ -34,8 +38,9 @@ class ISODate {
         month = parseInt(month);
         let day = parts[2];
         day = parseInt(day);
-        console.log(date, day, month, daysInMonth[month], daysInMonth[month] == day)
-        return (day <= daysInMonth[month] ? true : false);
+        if (!(day <= daysInMonth[month])) {
+            throw new RangeError("invalid date range", { cause: "INVALID_RANGE" });
+        }
     }
 
     getFullDate() {
@@ -52,6 +57,11 @@ class ISODate {
 
     getDate() {
         let isoString = this.date.toISOString().split("T");
+        return isoString[0];
+    }
+
+    static dateToString(date) {
+        let isoString = date.toISOString().split("T");
         return isoString[0];
     }
 

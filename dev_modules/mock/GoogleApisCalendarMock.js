@@ -92,19 +92,21 @@ class GoogleApisCalendarMock extends HttpMock {
 
 
         try {
-
-
-
+            ISODate.isValid(query.timeMin);
+            ISODate.isValid(query.timeMax);
             data = this.filterEvents(query.timeMin, query.timeMax);
+            if (data.length == 0) {
+                throw new Error("No events in date range", { cause: "RANGE_EMPTY" });
+            }
         } catch (e) {
-
             data = {
                 success: false,
                 error: true,
-                code: "INVALID_RANGE",
+                code: e.cause,
                 message: e.message
             };
         }
+
 
 
         return Response.json(data);
@@ -126,24 +128,18 @@ class GoogleApisCalendarMock extends HttpMock {
 
     // Should be able to take both OR either of timeMin, timeMax.
     filterEvents(timeMin, timeMax) {
-
-        let e = new RangeError("invalid date");
-        if (false) {
-            throw e;
-        }
-
-        let validMin = ISODate.isValid(timeMin);
-
         let min = new Date(timeMin);
         let max = new Date(timeMax);
         let range = new DateRange(min, max);
-        console.log(min, max);
 
         function fn(event) {
             // these variables should eventually be a separate function to process localization
             // ternary to check if dateTime exists; if exists, get the year-month-day part of the string. if not, get normal date.
-            let eventStart = new Date(event.start.dateTime || event.start.date);
-            let eventEnd = new Date(event.end.dateTime || event.end.date);
+            let startString = event.start.date || event.start.dateTime.split("T")[0];
+            let endString = event.end.date || event.end.dateTime.split("T")[0];
+
+            let eventStart = new Date(startString);
+            let eventEnd = new Date(endString);
 
             return range.isWithinRange(eventStart, eventEnd);
             //return true;

@@ -12,7 +12,6 @@ class Url {
         //let re = /:\/\/ | ? | #/mis;
         let re = /:\/\/|\?/gis;
         let parts = this.url.split(re);
-        console.log(parts);
         this.scheme = parts.shift();
         let qs;
         if (parts.length == 2) {
