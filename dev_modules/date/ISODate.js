@@ -38,9 +38,7 @@ class ISODate {
         month = parseInt(month);
         let day = parts[2];
         day = parseInt(day);
-        if (!(day <= daysInMonth[month])) {
-            throw new RangeError("invalid date range", { cause: "INVALID_RANGE" });
-        }
+        return day <= daysInMonth[month];
     }
 
     getFullDate() {

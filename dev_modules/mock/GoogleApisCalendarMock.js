@@ -88,16 +88,14 @@ class GoogleApisCalendarMock extends HttpMock {
         // 30 days hath September, April, June & November.
 
         try {
-            if (query.timeMin != null) {
-                ISODate.isValid(query.timeMin);
+            if (query.timeMin && !ISODate.isValid(query.timeMin)) {
+                throw new RangeError("invalid date range", { cause: "INVALID_RANGE" });
             }
-            if (query.timeMax != null) {
-                ISODate.isValid(query.timeMax);
+            if (query.timeMax && !ISODate.isValid(query.timeMax)) {
+                throw new RangeError("invalid date range", { cause: "INVALID_RANGE" });
             }
             data = this.filterEvents(query.timeMin, query.timeMax);
-            if (data.length == 0) {
-                throw new Error("No events in date range", { cause: "RANGE_EMPTY" });
-            }
+
         } catch (e) {
             data = {
                 success: false,
@@ -128,7 +126,10 @@ class GoogleApisCalendarMock extends HttpMock {
 
     // Should be able to take both OR either of timeMin, timeMax.
     filterEvents(timeMin, timeMax) {
-        let range = new DateRange(timeMin, timeMax);
+
+        timeMin = !timeMin ? null : new Date(timeMin);
+        timeMax = !timeMax ? null : new Date(timeMax);
+        let range = timeMin && timeMax ? new DateRange(timeMin, timeMax) : null;
 
         function fn(event) {
             // these variables should eventually be a separate function to process localization
@@ -138,8 +139,16 @@ class GoogleApisCalendarMock extends HttpMock {
 
             let eventStart = new Date(startString);
             let eventEnd = new Date(endString);
+            if (timeMin && timeMax) {
+                return range.isWithinRange(eventStart, eventEnd);
+            }
+            if (timeMin && !timeMax) {
+                return (timeMin <= eventStart) || (timeMin <= eventEnd);
+            }
+            if (timeMax && !timeMin) {
+                return (eventStart <= timeMax) || (eventEnd <= timeMax);
+            }
 
-            return range.isWithinRange(eventStart, eventEnd);
             //return true;
         }
 

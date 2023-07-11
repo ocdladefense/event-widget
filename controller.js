@@ -82,6 +82,7 @@ async function init() {
     //await client.send(req)
     resp.json()
         .then(events => {
+
             if (events.error) {
                 throw new Error(events.message, { cause: events });
             }

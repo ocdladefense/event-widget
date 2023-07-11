@@ -3,7 +3,7 @@ import { ISODate } from "./dev_modules/date/ISODate.js";
 export default renderEvents;
 
 function renderEvents(data) {
-    return data.map(renderEvent); // This is how we pass an identifier to map().
+    return data.length == 0 ? "No Events" : data.map(renderEvent); // This is how we pass an identifier to map().
 }
 
 function renderEvent(event, index) {
