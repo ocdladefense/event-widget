@@ -1,4 +1,4 @@
-import { ISODate } from "./dev_modules/date/ISODate.js";
+import { ISODate } from "../date/ISODate.js";
 
 export default renderEvents;
 
@@ -13,10 +13,10 @@ function renderEvent(event, index) {
     endDate = endDate.eventDate(event);
 
     return `<div key=${index}>
-                    <h2>${event.summary}</h2>
-                    <p>Location: ${event.location}</p>
-                    <p>Description: ${event.description}</p>
-                    <p>Start Date: ${startDate}</p>
-                    <p>End Date: ${endDate}</p>
-                </div>`;
+        <h2>${event.summary}</h2>
+        <p>Location: ${event.location}</p>
+        <p>Description: ${event.description}</p>
+        <p>Start Date: ${startDate}</p>
+        <p>End Date: ${endDate}</p>
+    </div>`;
 }

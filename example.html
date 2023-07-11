@@ -27,27 +27,13 @@
 <script type="module">
 
 
-    // import Autocomplete from "autocomplete.js";
-    import Init from "../controller.js";
+    import { Events } from "./dev_modules/webc-events/Events.js";
 
-    window.onload = Init;
+    window.onload = init;
 
-    // https://medium.com/streak-developer-blog/the-complexities-of-implementing-inline-autocomplete-for-content-editables-e358c0ed504b
-
-    // customElements.define("word-count", WordCount, { extends: "p" });
-    // customElements.define("webc-autocomplete", Autocomplete);
-    //customElements.define("webc-events", Events);
-
-    /*
-    window.init = init;
-    domReady(init);
-
-    async function init() {
-
-        let autocomplete = document.getElementById("query");
-
+    function init() {
+        customElements.define("webc-events", Events);
     }
-    */
 </script>
 
 
