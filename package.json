@@ -17,9 +17,9 @@
   },
   "homepage": "https://github.com/ocdladefense/webc-events#readme",
   "dependencies": {
-    "@ocdladefense/lib-http": "file:./dev_modules/lib-http",
-    "@ocdladefense/lib-polyfill": "file:./dev_modules/lib-polyfill",
-    "@ocdladefense/lib-date": "file:./dev_modules/lib-date",
+    "@ocdladefense/lib-http": "https://github.com/ocdladefense/node-lib-http",
+    "@ocdladefense/lib-polyfill": "https://github.com/ocdladefense/node-lib-polyfill",
+    "@ocdladefense/lib-date": "https://github.com/ocdladefense/node-lib-date",
     "@ocdladefense/lib-mock": "file:./dev_modules/lib-mock"
   }
 }
