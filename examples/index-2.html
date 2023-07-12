@@ -9,6 +9,8 @@
 
 <body>
     <h1>Testing Mock Calendar api</h1>
+    <webc-events calendar-id="events@thebierelibrary.com" start-date="" end-date="" />
+    <!--
     <div id="btlist">
         <button id="button">Press me for default day!</button>
         <button id="filter">Press me for custom filtering!</button>
@@ -17,20 +19,21 @@
         <button id="tomorrow">Press me for today and tomorrow!</button>
         <button id="invalid">Press me for invalid response!</button>
     </div>
-    <div id="events">
+    -->
 
-    </div>
-
-    <!-- <custom-events start="" end="" limit="5" /> -->
     <script type="module">
         import Init from "./controller.js";
 
+        window.onload = Init;
+
+        /*
         let btList = document.getElementById('btlist');
         let children = btList.children;
 
         for (var i = 0; i < children.length; i++) {
             children[i].addEventListener("click", Init);
         }
+        */
 
         
     </script>

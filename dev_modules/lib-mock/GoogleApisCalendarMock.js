@@ -1,7 +1,7 @@
-import { ISODate } from "../date/ISODate.js";
-import { HttpMock } from "../http/HttpMock.js";
-import { Url } from "../http/Url.js";
-import { DateRange } from "../date/DateRange.js";
+import { ISODate } from "../lib-date/ISODate.js";
+import { HttpMock } from "../lib-http/HttpMock.js";
+import { Url } from "../lib-http/Url.js";
+import { DateRange } from "../lib-date/DateRange.js";
 export { GoogleApisCalendarMock };
 
 let event1 = {
