@@ -1,7 +1,7 @@
 {
-    "name": "@ocdladefense/lib-polyfill",
+    "name": "@ocdladefense/lib-date",
     "version": "1.0.0",
-    "author": "Zaelin Bull <zaelin.bull3501@gmail.com> (https://github.com/Straven35)",
+    "author": "Isaac Lewis <isaaccl98@gmail.com> (https://github.com/Lewisic)",
     "contributors": [
         {"name": "Zaelin Bull", "email": "zaelin.bull3501@gmail.com", "url": "https://github.com/Straven35"},
         {"name": "Isaac Lewis", "email": "isaaccl98@gmail.com", "url": "https://github.com/Lewisic"}
