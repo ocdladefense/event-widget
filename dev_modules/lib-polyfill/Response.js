@@ -1,15 +1,12 @@
-export { ResponseJsonPolyFill };
+
 
 // Check if Response.json() exists
 // If not, add function declaration
 
 // Response.json() is the static function - it doesn't need to use the 'this' keyword.
 // The way to add a static function to an already existing class is either prototype or just assignment.
-
-// 
-
-function ResponseJsonPolyFill() {
-    if (typeof Response.json === "object") {
+(function ResponsePolyFill() {
+    if (typeof Response.json !== "function") {
         Response.json = function(...args) {
 
             // Get original arguments for method
@@ -27,7 +24,7 @@ function ResponseJsonPolyFill() {
             } catch(err) {
                 respData = "";
                 respOptions.status = 307;
-                console.error("Response TypeError: ", error);
+                console.error("Response TypeError: ", err);
             }
 
             respOptions.status = (options.status) ? options.status : respOptions.status;
@@ -44,5 +41,5 @@ function ResponseJsonPolyFill() {
             return resp;
         }
     }
-}
+})();
 

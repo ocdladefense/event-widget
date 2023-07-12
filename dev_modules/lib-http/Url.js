@@ -22,21 +22,34 @@ class Url {
         this.domain = parts.shift();
         this.path = PATH_SEPARATOR + parts.join(PATH_SEPARATOR);
         if (qs != null) {
-            this.parseQueryString(qs);
+            this.query = Url.parseQueryString(qs);
         }
 
 
     }
     //https://www.googleapis.com/calendar/v3/calendars/biere-library@thebierelibrary.com/events?timeMin=2023-07-01&timeMax=2023=07-15&test
-    parseQueryString(qs) {
+    static parseQueryString(qs) {
         let queryParts = qs.split("&");
+        let query = {};
         for (let i = 0; i < queryParts.length; i++) {
             let kvp = queryParts[i];
             let parts = kvp.split("=");
             let key = parts[0];
             let value = parts[1];
-            this.query[key] = value;
+            query[key] = value;
         }
+
+        return query;
+    }
+
+    static formatQueryString(obj) {
+        let params = [];
+        for (let prop in obj) {
+            let kvp;
+            kvp = prop + "=" + obj[prop];
+            params.push(kvp);
+        };
+        return params.join("&");
     }
 
     getDomain() {
