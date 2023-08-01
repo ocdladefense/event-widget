@@ -1,8 +1,8 @@
-import { HttpClient } from "../node_modules/@ocdladefense/lib-http/HttpClient.js";
-import { Url } from "../node_modules/@ocdladefense/lib-http/Url.js";
-import { GoogleApisCalendarMock } from "../dev_modules/lib-mock/GoogleApisCalendarMock.js";
-import { ISODate } from "../dev_modules/lib-date/ISODate.js";
-import "../node_modules/@ocdladefense/lib-polyfill/Response.js";
+import { HttpClient } from "~/node_modules/@ocdladefense/lib-http/HttpClient.js";
+import { Url } from "~/node_modules/@ocdladefense/lib-http/Url.js";
+import { GoogleApisCalendarMock } from "~/node_modules/@ocdladefense/lib-mock/GoogleApisCalendarMock.js";
+import { ISODate } from "~/node_modules/@ocdladefense/lib-date/ISODate.js";
+import "~/node_modules/@ocdladefense/lib-polyfill/Response.js";
 export { WebcEvents };
 
 // Pretending what the current environment looks like for this machine/application.

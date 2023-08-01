@@ -2,7 +2,7 @@
   "name": "@ocdladefense/webc-events",
   "version": "1.0.0",
   "description": "Custom web component to display Google Calendar events.",
-  "browser": "src/WebcEvents.js",
+  "browser": "dist/WebcEvents.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +20,6 @@
     "@ocdladefense/lib-http": "https://github.com/ocdladefense/node-lib-http",
     "@ocdladefense/lib-polyfill": "https://github.com/ocdladefense/node-lib-polyfill",
     "@ocdladefense/lib-date": "https://github.com/ocdladefense/node-lib-date",
-    "@ocdladefense/lib-mock": "file:./dev_modules/lib-mock"
+    "@ocdladefense/lib-mock": "https://github.com/ocdladefense/node-lib-mock"
   }
 }
